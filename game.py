@@ -4,6 +4,8 @@ from player import Player, NPC
 import config
 from game_state import GameState
 
+# Se for adicionar novo sprites como obstaculo os coloque aqui
+obstacles = ['J', 'K', 'L', 'Z', 'N', 'B', 'C', 'V', 'R', 'E', 'T', 'U', 'I', 'A', 'S', 'D', 'Q']
 
 class Game:
     def __init__(self, screen):
@@ -82,7 +84,7 @@ class Game:
         new_position = [unit.position[0] + position_change[0], unit.position[1] + position_change[1]]
 
         if 0 <= new_position[0] < len(self.map[0]) and 0 <= new_position[1] < len(self.map):
-            if self.map[new_position[1]][new_position[0]] != "U":
+            if self.map[new_position[1]][new_position[0]] not in obstacles:
                 unit.update_position(new_position)
 
     def determine_camera(self):
