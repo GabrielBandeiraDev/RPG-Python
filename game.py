@@ -4,6 +4,8 @@ from player import Player, NPC
 import config
 from game_state import GameState
 
+# Se for adicionar novo sprites como obstaculo os coloque aqui
+obstacles = ['J', 'K', 'L', 'Z', 'N', 'B', 'C', 'V', 'R', 'E', 'T', 'U', 'I', 'A', 'S', 'D', 'Q']
 
 class Game:
     def __init__(self, screen):
@@ -71,7 +73,7 @@ class Game:
             x_pos = 0
             for tile in line:
                 image = map_tile_image[tile]
-                rect = pygame.Rect(x_pos * config.SCALE, y_pos * config.SCALE - (self.camera[1] * config.SCALE),
+                rect = pygame.Rect(x_pos * config.SCALE - (self.camera[0] * config.SCALE), y_pos * config.SCALE - (self.camera[1] * config.SCALE),
                                    config.SCALE, config.SCALE)
                 screen.blit(image, rect)
                 x_pos = x_pos + 1
@@ -82,10 +84,13 @@ class Game:
         new_position = [unit.position[0] + position_change[0], unit.position[1] + position_change[1]]
 
         if 0 <= new_position[0] < len(self.map[0]) and 0 <= new_position[1] < len(self.map):
-            if self.map[new_position[1]][new_position[0]] != "U":
+            if self.map[new_position[1]][new_position[0]] not in obstacles:
+                self.determine_camera()
                 unit.update_position(new_position)
 
     def determine_camera(self):
+
+        # Camera em y
         max_y_position = len(self.map) - config.SCREEN_HEIGHT / config.SCALE
 
         y_position = self.player.position[1] - math.ceil(round(config.SCREEN_HEIGHT / config.SCALE) / 2)
@@ -96,6 +101,18 @@ class Game:
             self.camera[1] = 0
         else:
             self.camera[1] = max_y_position
+
+        # Camera em x
+        max_x_position = len(self.map[0]) - config.SCREEN_WIDTH / config.SCALE
+
+        x_position = self.player.position[0] - math.ceil(round(config.SCREEN_WIDTH / config.SCALE) / 2)
+
+        if 0 <= x_position <= max_x_position:
+            self.camera[0] = x_position
+        elif x_position < 0:
+            self.camera[0] = 0
+        else:
+            self.camera[0] = max_x_position
 
 
 map_tile_image = {
