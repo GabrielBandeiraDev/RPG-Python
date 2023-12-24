@@ -4,9 +4,10 @@ from game_state import GameState
 
 from game import Game
 
-#iniciar pygame
+# iniciar pygame
 pygame.init()
-#iniciar display
+
+# iniciar display
 screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
 
 pygame.display.set_caption("Rpg-Python")
