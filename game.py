@@ -13,7 +13,8 @@ from game_view.battle import Battle
 
 # Se for adicionar novo sprites como obstáculos coloque aqui
 obstacles = ['J', 'K', 'L', 'Z', 'N', 'B', 'C', 'V', 'R', 'E', 'T', 'U', 'I', 'A', 'S', 'D', 'Q']
-
+# Areas de spam de monstros
+monster_field = ["G"]
 
 class Game:
     def __init__(self, screen):
@@ -64,14 +65,14 @@ class Game:
         self.determine_pokemon_found(map_tile)
 
     def determine_pokemon_found(self, map_tile):
-        random_number = utilities.generate_random_number(1, 10)
+        random_number = utilities.generate_random_number(1, 70)
 
-        if random_number <= 2 and map_tile == "G":
+        if random_number <= 2 and map_tile in monster_field:
             found_monster = self.monster_factory.create_monster(map_tile)
-            print("you found a monster!")
-            print("Monster Type: " + found_monster.type)
-            print("Attack: " + str(found_monster.attack))
-            print("Health: " + str(found_monster.health))
+            print("Você encontrou um monstro!")
+            print("Tipo: " + found_monster.type)
+            print("Ataque: " + str(found_monster.attack))
+            print("Vida: " + str(found_monster.health))
 
             self.battle = Battle(self.screen, found_monster, self.player)
             self.current_game_state = CurrentGameState.BATTLE
@@ -101,7 +102,7 @@ class Game:
         if new_position[1] < 0 or new_position[1] > (len(self.map.map_array) - 1):
             return
 
-        if self.map.map_array[new_position[1]][new_position[0]] == config.MAP_TILE_WATER:
+        if self.map.map_array[new_position[1]][new_position[0]] in obstacles:
             return
 
         self.player_has_moved = True
