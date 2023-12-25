@@ -127,7 +127,6 @@ class Game:
                         if any(item in doors for item in self.proximos):
                             self.map.load(self.file_name)
 
-
     def move_unit(self, unit, position_change):
         new_position = [unit.position[0] + position_change[0], unit.position[1] + position_change[1]]
 
