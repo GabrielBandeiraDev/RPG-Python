@@ -66,7 +66,7 @@ class Game:
     def determine_pokemon_found(self, map_tile):
         random_number = utilities.generate_random_number(1, 10)
 
-        if random_number <= 2:
+        if random_number <= 2 and map_tile == "G":
             found_monster = self.monster_factory.create_monster(map_tile)
             print("you found a monster!")
             print("Monster Type: " + found_monster.type)
