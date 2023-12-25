@@ -1,7 +1,7 @@
 import pygame
-import config
+import scripts.config as config
 import math
-import utilities
+import scripts.utilities as utilities
 
 
 class Map:
@@ -10,34 +10,38 @@ class Map:
         self.map_array = []
         self.camera = [0, 0]
         self.map_tile_image = {
-            "G": pygame.transform.scale(pygame.image.load("imgs/grass1.png"), (config.SCALE, config.SCALE)),
-            "W": pygame.transform.scale(pygame.image.load("imgs/grass2.png"), (config.SCALE, config.SCALE)),
-            "J": pygame.transform.scale(pygame.image.load("imgs/grass3.png"), (config.SCALE, config.SCALE)),
-            "K": pygame.transform.scale(pygame.image.load("imgs/grass4.png"), (config.SCALE, config.SCALE)),
-            "L": pygame.transform.scale(pygame.image.load("imgs/grass5.png"), (config.SCALE, config.SCALE)),
-            "Z": pygame.transform.scale(pygame.image.load("imgs/grass6.png"), (config.SCALE, config.SCALE)),
-            "X": pygame.transform.scale(pygame.image.load("imgs/grass7.png"), (config.SCALE, config.SCALE)),
-            "C": pygame.transform.scale(pygame.image.load("imgs/grass8.png"), (config.SCALE, config.SCALE)),
-            "V": pygame.transform.scale(pygame.image.load("imgs/grass9.png"), (config.SCALE, config.SCALE)),
-            "B": pygame.transform.scale(pygame.image.load("imgs/grass10.png"), (config.SCALE, config.SCALE)),
-            "N": pygame.transform.scale(pygame.image.load("imgs/grass11.png"), (config.SCALE, config.SCALE)),
-            "M": pygame.transform.scale(pygame.image.load("imgs/grass12.png"), (config.SCALE, config.SCALE)),
-            "Q": pygame.transform.scale(pygame.image.load("imgs/grass27.png"), (config.SCALE, config.SCALE)),
-            "R": pygame.transform.scale(pygame.image.load("imgs/grass14.png"), (config.SCALE, config.SCALE)),
-            "E": pygame.transform.scale(pygame.image.load("imgs/grass15.png"), (config.SCALE, config.SCALE)),
-            "T": pygame.transform.scale(pygame.image.load("imgs/grass16.png"), (config.SCALE, config.SCALE)),
-            "Y": pygame.transform.scale(pygame.image.load("imgs/grass18.png"), (config.SCALE, config.SCALE)),
-            "U": pygame.transform.scale(pygame.image.load("imgs/grass17.png"), (config.SCALE, config.SCALE)),
-            "I": pygame.transform.scale(pygame.image.load("imgs/grass19.png"), (config.SCALE, config.SCALE)),
-            "O": pygame.transform.scale(pygame.image.load("imgs/grass22.png"), (config.SCALE, config.SCALE)),
-            "P": pygame.transform.scale(pygame.image.load("imgs/grass21.png"), (config.SCALE, config.SCALE)),
-            "A": pygame.transform.scale(pygame.image.load("imgs/grass24.png"), (config.SCALE, config.SCALE)),
-            "S": pygame.transform.scale(pygame.image.load("imgs/grass25.png"), (config.SCALE, config.SCALE)),
-            "D": pygame.transform.scale(pygame.image.load("imgs/grass26.png"), (config.SCALE, config.SCALE))
+            "G": pygame.transform.scale(pygame.image.load("../imgs/grass1.png"), (config.SCALE, config.SCALE)),
+            "W": pygame.transform.scale(pygame.image.load("../imgs/grass2.png"), (config.SCALE, config.SCALE)),
+            "J": pygame.transform.scale(pygame.image.load("../imgs/grass3.png"), (config.SCALE, config.SCALE)),
+            "K": pygame.transform.scale(pygame.image.load("../imgs/grass4.png"), (config.SCALE, config.SCALE)),
+            "L": pygame.transform.scale(pygame.image.load("../imgs/grass5.png"), (config.SCALE, config.SCALE)),
+            "Z": pygame.transform.scale(pygame.image.load("../imgs/grass6.png"), (config.SCALE, config.SCALE)),
+            "X": pygame.transform.scale(pygame.image.load("../imgs/grass7.png"), (config.SCALE, config.SCALE)),
+            "C": pygame.transform.scale(pygame.image.load("../imgs/grass8.png"), (config.SCALE, config.SCALE)),
+            "V": pygame.transform.scale(pygame.image.load("../imgs/grass9.png"), (config.SCALE, config.SCALE)),
+            "B": pygame.transform.scale(pygame.image.load("../imgs/grass10.png"), (config.SCALE, config.SCALE)),
+            "N": pygame.transform.scale(pygame.image.load("../imgs/grass11.png"), (config.SCALE, config.SCALE)),
+            "M": pygame.transform.scale(pygame.image.load("../imgs/grass12.png"), (config.SCALE, config.SCALE)),
+            "Q": pygame.transform.scale(pygame.image.load("../imgs/grass27.png"), (config.SCALE, config.SCALE)),
+            "R": pygame.transform.scale(pygame.image.load("../imgs/grass14.png"), (config.SCALE, config.SCALE)),
+            "E": pygame.transform.scale(pygame.image.load("../imgs/grass15.png"), (config.SCALE, config.SCALE)),
+            "T": pygame.transform.scale(pygame.image.load("../imgs/grass16.png"), (config.SCALE, config.SCALE)),
+            "Y": pygame.transform.scale(pygame.image.load("../imgs/grass18.png"), (config.SCALE, config.SCALE)),
+            "U": pygame.transform.scale(pygame.image.load("../imgs/grass17.png"), (config.SCALE, config.SCALE)),
+            "I": pygame.transform.scale(pygame.image.load("../imgs/grass19.png"), (config.SCALE, config.SCALE)),
+            "O": pygame.transform.scale(pygame.image.load("../imgs/grass22.png"), (config.SCALE, config.SCALE)),
+            "P": pygame.transform.scale(pygame.image.load("../imgs/grass21.png"), (config.SCALE, config.SCALE)),
+            "A": pygame.transform.scale(pygame.image.load("../imgs/grass24.png"), (config.SCALE, config.SCALE)),
+            "S": pygame.transform.scale(pygame.image.load("../imgs/grass25.png"), (config.SCALE, config.SCALE)),
+            "D": pygame.transform.scale(pygame.image.load("../imgs/grass26.png"), (config.SCALE, config.SCALE)),
+            'w': pygame.transform.scale(pygame.image.load("../imgs/white.png"), (config.SCALE, config.SCALE)),
+            'b': pygame.transform.scale(pygame.image.load("../imgs/black.png"), (config.SCALE, config.SCALE)),
+            'g': pygame.transform.scale(pygame.image.load("../imgs/green.png"), (config.SCALE, config.SCALE)),
         }
 
     def load(self, file_name):
-        with open('maps/' + file_name + ".txt") as map_file:
+        self.map_array = []
+        with open('../maps/' + file_name + ".txt") as map_file:
             for line in map_file:
                 tiles = []
                 for i in range(0, len(line) - 1, 2):
@@ -89,10 +93,3 @@ class Map:
             self.camera[0] = 0
         else:
             self.camera[0] = max_x_position
-
-
-# map_tile_image = {
-#     config.MAP_TILE_GRASS: pygame.transform.scale(pygame.image.load("imgs/grass1.png"), (config.SCALE, config.SCALE)),
-#     config.MAP_TILE_WATER: pygame.transform.scale(pygame.image.load("imgs/grass14.png"), (config.SCALE, config.SCALE)),
-#     config.MAP_TILE_ROAD: pygame.transform.scale(pygame.image.load("imgs/grass11.png"), (config.SCALE, config.SCALE)),
-# }
