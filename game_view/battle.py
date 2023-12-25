@@ -23,10 +23,14 @@ class Battle:
         self.screen.blit(self.player.image, (320, 40))
 
         font = pygame.font.SysFont(None, 24)
-        img = font.render("health: " + str(self.monster.health) + " Attack: " + str(self.monster.attack), True, config.BLACK)
+        img = font.render("Vida: " + str(self.monster.health),
+                          True, config.BLACK)
         self.screen.blit(img, (20, 120))
 
-        img = font.render("press enter to attack!", True, config.BLACK)
+        img = font.render(f"Ataque: " + str(self.monster.attack), True, config.BLACK)
+        self.screen.blit(img, (20, 140))
+
+        img = font.render("Use ENTER para atacar!", True, config.BLACK)
         self.screen.blit(img, (20, 220))
         pass
 
@@ -34,7 +38,6 @@ class Battle:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.game.game_state = GameState.ENDED
-            #     handle key events
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     self.game.game_state = GameState.ENDED
