@@ -1,8 +1,8 @@
 import pygame
-import config
+import scripts.config as config
 import math
-from game_state import GameState
-import utilities
+from scripts.game_state import GameState
+import scripts.utilities as utilities
 
 
 class Battle:
@@ -42,4 +42,4 @@ class Battle:
                 if event.key == pygame.K_ESCAPE:
                     self.game.game_state = GameState.ENDED
                 if event.key == pygame.K_RETURN:
-                    self.monster.health = self.monster.health - 1
+                    self.monster.health = self.monster.health - 1  # Esse -1 é o ataque do player
