@@ -1,12 +1,12 @@
-# StockFlow API: Sistema de Gerenciamento de Estoque e Vendas
+# StockMaster API: Sistema de Gerenciamento de Estoque e Vendas
 
 ![StockFlow](https://i.imgur.com/JK7w3P9.png)
 
 ## Descrição
 
-O StockFlow é um sistema completo de gerenciamento de estoque e vendas desenvolvido com FastAPI e Python. Este projeto foi criado como uma solução robusta para pequenas e médias empresas gerenciarem seu inventário, vendas e análises de negócios.
+O StockMaster é um sistema completo de gerenciamento de estoque e vendas desenvolvido com FastAPI e Python. Este projeto foi criado como uma solução para o desafio do instituto IBBI , voltado para o treinamento de Conhecimentos de Gabriel B. - Dev . PL 
 
-O sistema oferece:
+- O sistema oferece:
 
 - Autenticação segura via JWT
 - CRUD completo para produtos
@@ -38,7 +38,7 @@ git clone https://github.com/seu-usuario/stockflow-api.git
 
 2. Entre no diretório do projeto:
 ```bash
-cd stockflow-api
+cd stockMaster-api
 ```
 
 3. Crie e ative um ambiente virtual (recomendado):
@@ -122,23 +122,23 @@ curl -X POST "http://localhost:8000/products/" \
 }'
 ```
 
-## Contribuição
+## Preto no Branco para DEVS (Analisar o Código)
 
-Contribuições são bem-vindas! Siga estes passos:
+-Logo após o DEV clonar o repositório , deve fazer o pip dos requeriments.txt logo após isso ele irá :
+-Terminal : CD Backend , (Uvicorn main:app --reload )
+-Terminal 2 : CD src/ , (Npm run dev )
+-Logo após isso o Dev abre o LocalHost na "/" 
+-Login (user@example.com)/(senha : secret)
 
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/incrivel`)
-3. Commit suas mudanças (`git commit -am 'Adiciona feature incrível'`)
-4. Push para a branch (`git push origin feature/incrivel`)
-5. Abra um Pull Request
+-como acessar rotas ?
 
-## Licença
+-Rotas de produto  - /produtos , /cadastro , /dashboard.
 
-Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
-## Contato
+## Video no Youtube 
 
 Para dúvidas ou sugestões, entre em contato:
 
-- Email: contato@stockflow.com
-- Site: [www.stockflow.com](https://www.stockflow.com)
+- Eu deixei um Video no youtube, e uma documentação em PDF do meu codigo completo de forma bem explicada!
+- PDF :
+- Video : 
