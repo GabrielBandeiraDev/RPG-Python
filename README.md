@@ -122,17 +122,69 @@ curl -X POST "http://localhost:8000/products/" \
 }'
 ```
 
-## Preto no Branco para DEVS (Analisar o Código)
+Claro! Aqui está a versão formatada e organizada do seu conteúdo, ideal para ser usada em um `README.md` no GitHub, na seção **"Preto no Branco para DEVs"**:
 
--Logo após o DEV clonar o repositório , deve fazer o pip dos requeriments.txt logo após isso ele irá :
--Terminal : CD Backend , (Uvicorn main:app --reload )
--Terminal 2 : CD src/ , (Npm run dev )
--Logo após isso o Dev abre o LocalHost na "/" 
--Login (user@example.com)/(senha : secret)
+---
 
--como acessar rotas ?
+## 🧑‍💻 Preto no Branco para DEVs
 
--Rotas de produto  - /produtos , /cadastro , /dashboard.
+### 🚀 Passo a passo para rodar o projeto
+
+1. **Clone o repositório**:
+
+   ```bash
+   git clone <URL-do-repositório>
+   ```
+
+2. **Instale as dependências do backend**:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Inicie o backend**:
+
+   No terminal:
+
+   ```bash
+   cd backend
+   uvicorn main:app --reload
+   ```
+
+4. **Inicie o frontend**:
+
+   Em outro terminal:
+
+   ```bash
+   cd src
+   npm install  # (caso ainda não tenha instalado os pacotes)
+   npm run dev
+   ```
+
+5. **Acesse a aplicação no navegador**:
+
+   ```
+   http://localhost:3000/
+   ```
+
+### 🔐 Login de Teste
+
+* **Usuário**: `user@example.com`
+* **Senha**: `secret`
+
+---
+
+### 🌐 Como acessar as rotas
+
+| Tipo      | Rota         | Descrição                          |
+| --------- | ------------ | ---------------------------------- |
+| Produtos  | `/produtos`  | Listagem de produtos               |
+| Cadastro  | `/cadastro`  | Cadastro de novos produtos/usuário |
+| Dashboard | `/dashboard` | Visualização geral da aplicação    |
+
+---
+
+
 
 
 ## Video no Youtube 
