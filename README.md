@@ -1,34 +1,144 @@
-# RPG-Python: Projeto Voluntário de Desenvolvimento
+# StockFlow API: Sistema de Gerenciamento de Estoque e Vendas
 
-![RPG-Python](https://i.imgur.com/GK6TSGl.png)
+![StockFlow](https://i.imgur.com/JK7w3P9.png)
 
 ## Descrição
 
-O RPG-Python é um projeto liderado por Gabriel Bandeira, Desenvolvedor Manager, que conta com uma equipe de cinco voluntários. O objetivo do jogo é estritamente educacional, sem fins lucrativos. Todo o desenvolvimento, desde a tela de inicialização até as mecânica, é realizado em Python.
+O StockFlow é um sistema completo de gerenciamento de estoque e vendas desenvolvido com FastAPI e Python. Este projeto foi criado como uma solução robusta para pequenas e médias empresas gerenciarem seu inventário, vendas e análises de negócios.
 
-A singularidade do RPG-Python reside na dedicação da equipe em explorar as nuances da linguagem Python na criação de um jogo. Cada voluntário contribui com suas habilidades, formando um grupo diversificado. A proposta é construir não apenas um jogo, mas um projeto que sirva como plataforma de aprendizado prático, fomentando o desenvolvimento de habilidades técnicas e promovendo a colaboração.
+O sistema oferece:
 
-Gabriel Bandeira, além de ser o Desenvolvedor Manager, desempenha um papel orientador, incentivando a criatividade e buscando a excelência na equipe. O projeto não busca lucro, mas sim estabelecer um legado educacional e inspirar outros desenvolvedores.
+- Autenticação segura via JWT
+- CRUD completo para produtos
+- Registro de vendas com cálculo automático de valores
+- Dashboard analítico em tempo real
+- Histórico completo de alterações
+- WebSocket para atualizações instantâneas
+- Cache com Redis para alta performance
+- Sincronização entre estoque principal e dashboard
 
-Assim, o RPG-Python não é apenas um jogo em desenvolvimento, mas uma iniciativa que representa a interseção entre a tecnologia e a paixão pela programação, proporcionando uma jornada de aprendizado colaborativo e construção de comunidade.
+## Tecnologias Utilizadas
+
+- **FastAPI**: Framework moderno e rápido para construção de APIs
+- **SQLAlchemy**: ORM poderoso para interação com banco de dados
+- **Redis**: Sistema de cache para melhorar performance
+- **JWT**: Autenticação segura com JSON Web Tokens
+- **WebSocket**: Comunicação em tempo real entre servidor e clientes
+- **PostgreSQL/SQLite**: Bancos de dados suportados
+- **Pydantic**: Validação de dados eficiente
 
 ## Instalação
 
-Para instalar o RPG-Python, siga estas etapas:
+Para instalar e executar o StockFlow API, siga estas etapas:
 
-1. Clone o repositório: `git clone https://github.com/seu-usuario/rpg-python.git`
-2. Entre no diretório do projeto: `cd rpg-python`
-3. Instale as dependências: `pip install -r requirements.txt`
-4. Execute o jogo: `python main.py`
+1. Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/stockflow-api.git
+```
+
+2. Entre no diretório do projeto:
+```bash
+cd stockflow-api
+```
+
+3. Crie e ative um ambiente virtual (recomendado):
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate    # Windows
+```
+
+4. Instale as dependências:
+```bash
+pip install -r requirements.txt
+```
+
+5. Configure as variáveis de ambiente (crie um arquivo `.env`):
+```ini
+REDIS_HOST=localhost
+REDIS_PORT=6379
+REDIS_DB=0
+SECRET_KEY=sua_chave_secreta_aqui
+```
+
+6. Execute o servidor:
+```bash
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+O servidor estará disponível em `http://localhost:8000` e a documentação interativa (Swagger UI) em `http://localhost:8000/docs`.
 
 ## Uso
 
-Depois de instalar o RPG-Python, você pode começar a jogar executando o script `main.py`. Use as teclas WASD para mover o personagem pelo mapa. Pressione ENTER para entrar em batalhas com monstros.
+### Autenticação
+
+1. Primeiro, faça login para obter seu token:
+```bash
+curl -X POST "http://localhost:8000/auth/login" \
+-H "Content-Type: application/json" \
+-d '{"username": "user@example.com", "password": "secret"}'
+```
+
+2. Use o token retornado nas requisições subsequentes:
+```bash
+curl -X GET "http://localhost:8000/products/" \
+-H "Authorization: Bearer <seu_token_aqui>"
+```
+
+### Endpoints Principais
+
+- **Produtos**:
+  - `GET /products/` - Lista todos os produtos
+  - `POST /products/` - Cria um novo produto
+  - `PUT /products/{id}` - Atualiza um produto
+  - `DELETE /products/{id}` - Remove um produto
+
+- **Vendas**:
+  - `POST /products/purchase/` - Registra uma nova venda
+  - `GET /sales-history/` - Histórico de vendas
+
+- **Dashboard**:
+  - `GET /dashboard/products/` - Produtos para o dashboard
+  - `GET /top-products/` - Produtos mais vendidos
+  - `GET /sales-by-category/` - Vendas por categoria
+
+- **Configuração**:
+  - `POST /update_dollar_rate/` - Atualiza taxa de câmbio
+
+## Exemplo de Requisição
+
+Criar um novo produto:
+```bash
+curl -X POST "http://localhost:8000/products/" \
+-H "Authorization: Bearer <seu_token_aqui>" \
+-H "Content-Type: application/json" \
+-d '{
+    "description": "Notebook Dell Inspiron",
+    "image_url": "https://example.com/notebook.jpg",
+    "quantity": 15,
+    "suggested_quantity": 10,
+    "price": 4500.00,
+    "categories": ["Eletrônicos", "Informática"]
+}'
+```
 
 ## Contribuição
 
-Contribuições são bem-vindas! Se você gostaria de contribuir para o RPG-Python, por favor, abra uma issue ou pull request.
+Contribuições são bem-vindas! Siga estes passos:
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/incrivel`)
+3. Commit suas mudanças (`git commit -am 'Adiciona feature incrível'`)
+4. Push para a branch (`git push origin feature/incrivel`)
+5. Abra um Pull Request
 
 ## Licença
 
-Este projeto é licenciado sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
+Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
+
+## Contato
+
+Para dúvidas ou sugestões, entre em contato:
+
+- Email: contato@stockflow.com
+- Site: [www.stockflow.com](https://www.stockflow.com)
