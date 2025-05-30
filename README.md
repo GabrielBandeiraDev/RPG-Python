@@ -1,6 +1,6 @@
 # StockMaster API: Sistema de Gerenciamento de Estoque e Vendas
 
-![StockFlow](https://i.imgur.com/JK7w3P9.png)
+
 
 ## Descrição
 
